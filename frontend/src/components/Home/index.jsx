@@ -1,11 +1,12 @@
 import React from "react";
 
-import "./main.css";
+import "./home.css";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const styles = () => ({
   button: {
@@ -22,7 +23,9 @@ const styles = () => ({
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      roomLoading: false,
+    };
   }
 
   render() {
@@ -38,10 +41,19 @@ class Home extends React.Component {
           style={{ minHeight: "100vh" }}
         >
           <Grid item xs={12}>
-            <Button className={classes.button} startIcon={<AddBoxIcon />}>
+            <Button
+              className={classes.button}
+              startIcon={<AddBoxIcon />}
+              onClick={() => {
+                this.setState({ roomLoading: true });
+              }}
+            >
               create room
             </Button>
           </Grid>
+          {this.state.roomLoading ? (
+            <CircularProgress color="secondary" />
+          ) : null}
         </Grid>
       </body>
     );
