@@ -16,16 +16,13 @@ class App extends React.Component {
         <Switch>
           <Route
             path="/room/:roomId"
-            component={() => {
-              return <Room socket={socket} />;
-            }}
-          ></Route>
+            render={(routeProps) => <Room {...routeProps} socket={socket} />}
+          />
+
           <Route
             path="/home"
-            component={() => {
-              return <Home socket={socket} />;
-            }}
-          ></Route>
+            render={(routeProps) => <Home {...routeProps} socket={socket} />}
+          />
         </Switch>
       </Router>
     );
