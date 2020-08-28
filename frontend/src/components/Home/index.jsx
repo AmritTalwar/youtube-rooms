@@ -26,6 +26,19 @@ class Home extends React.Component {
     this.state = {
       roomLoading: false,
     };
+
+    this.onCreateRoomClick = this.onCreateRoomClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.socket.on("roomId", (roomId) => {
+      this.props.history.push(`/room/${roomId}`);
+    });
+  }
+
+  onCreateRoomClick() {
+    this.setState({ roomLoading: true });
+    this.props.socket.emit("createRoom");
   }
 
   render() {
@@ -44,9 +57,7 @@ class Home extends React.Component {
             <Button
               className={classes.button}
               startIcon={<AddBoxIcon />}
-              onClick={() => {
-                this.setState({ roomLoading: true });
-              }}
+              onClick={this.onCreateRoomClick}
             >
               create room
             </Button>
