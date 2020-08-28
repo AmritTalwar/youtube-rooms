@@ -11,12 +11,12 @@ io.on("connect", (socket) => {
     const roomId = randomstring.generate();
     const room = {
       roomId: roomId,
-      videoID: "dQw4w9WgXcQ",
       videoQueue: [],
     };
+
     socket.join(roomId);
-    socket.emit("roomId", room);
     rooms.push(room);
+    socket.emit("roomId", room.roomId);
   });
 
   socket.on("joinRoom", (roomId) => {
