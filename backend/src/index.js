@@ -23,7 +23,7 @@ io.on("connect", (socket) => {
     const room = rooms.find((room) => {
       return room.roomId === roomId;
     });
-    if (room !== {}) {
+    if (room) {
       socket.join(roomId);
       socket.emit("roomInfo", room);
     } else {
