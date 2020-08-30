@@ -6,8 +6,23 @@ class Room extends React.Component {
     super(props);
     this.state = {
       roomId: this.props.match.params.roomId,
+      room: {},
+      roomLoaded: false,
+      error: null,
     };
   }
+  componentDidMount() {
+    this.props.socket.on("roomInfo", (room) => {
+      this.setState({ roomLoaded: true, room: room });
+    });
+
+    this.props.socket.on("err", (message) => {
+      this.setState({ error: { message: message } });
+    });
+
+    this.props.socket.emit("joinRoom", this.state.roomId);
+  }
+
   render() {
     return (
       <div>
