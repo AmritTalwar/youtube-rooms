@@ -1,12 +1,12 @@
 import React from "react";
 
-import "./home.css";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import background from "../../images/background.png";
 
 const styles = () => ({
   button: {
@@ -17,6 +17,15 @@ const styles = () => ({
     color: "white",
     height: 48,
     padding: "0 30px",
+  },
+  background: {
+    backgroundImage: `url(${background})`,
+    position: "fixed",
+    minWidth: "100%",
+    minHeight: "100%",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
   },
 });
 
@@ -44,7 +53,7 @@ class Home extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <body>
+      <div className={classes.background}>
         <Grid
           container
           direction="column"
@@ -66,7 +75,7 @@ class Home extends React.Component {
             <CircularProgress color="secondary" />
           ) : null}
         </Grid>
-      </body>
+      </div>
     );
   }
 }
