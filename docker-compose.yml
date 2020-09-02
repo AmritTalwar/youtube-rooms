@@ -6,9 +6,17 @@ services:
       - ./backend/src:/app/src
     environment:
       FRONTEND_HOST: "http://localhost:3000"
+      DB_HOST: "mongodb"
+      DB_PORT: 27017
+      DB_NAME: "backend-db"
     ports:
       - 3001:3001
     entrypoint: yarn start:dev
+
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
 
   frontend:
     build: ./frontend
