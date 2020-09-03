@@ -32,18 +32,15 @@ io.on("connect", (socket) => {
     });
   });
 
-  //**REFACTOR JOINROOM */
-  // socket.on("joinRoom", (roomId) => {
-  //   const room = rooms.find((room) => {
-  //     return room.roomId === roomId;
-  //   });
-  //   if (room) {
-  //     socket.join(roomId);
-  //     socket.emit("roomInfo", room);
-  //   } else {
-  //     socket.emit("err", "room does not exist");
-  //   }
-  // });
+  socket.on("joinRoom", async (roomId) => {
+    const room = await Room.findById(roomId);
+    if (!room) {
+      socket.emit("err", "room does not exist");
+    }
+
+    socket.join(roomId);
+    socket.emit("roomInfo", room);
+  });
 
   socket.on("play", (roomId) => {
     socket.to(roomId).emit("play");
