@@ -1,10 +1,10 @@
 import React from "react";
-import Youtube from "react-youtube";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import PlayArrow from "@material-ui/icons/PlayArrow";
 import Pause from "@material-ui/icons/Pause";
 import { buttonStyle } from "../globalStyles";
+import ReactPlayer from "react-player";
 
 const styles = () => ({
   button: buttonStyle,
@@ -72,7 +72,11 @@ class Room extends React.Component {
     return (
       <div>
         <h1>Room ID: {this.state.roomId}</h1>
-        <Youtube videoId="dQw4w9WgXcQ"></Youtube>
+        <ReactPlayer
+          url="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          style={{ pointerEvents: "none" }} // Disable users from clicking in iframe to play and pause video
+          playing={this.state.videoPlaying}
+        />
 
         {this.state.videoPlaying ? (
           <Button
